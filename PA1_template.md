@@ -185,14 +185,12 @@ ggplot(actv_summary_date, aes(x=date)) +
 
 
 ```r
-ggplot(actv_summary_date, aes(date, steps_mean)) + 
-  geom_area(alpha = 0.5, color="#00AFBB", fill="#00AFBB") +
-  labs(x = "Date",y = "Average number of steps taken",
-       title= "Time Series Plot of Average Number of Steps Taken") 
-```
+actv_summary_inter <- activity %>% group_by(interval) %>% summarise(steps_mean= mean(steps, na.rm=TRUE))
 
-```
-## Warning: Removed 8 rows containing missing values (position_stack).
+ggplot(actv_summary_inter, aes(interval, steps_mean)) + 
+  geom_area(alpha = 0.5, color="#00AFBB", fill="#00AFBB") +
+  labs(x = "Time Interval",y = "Average number of steps taken",
+       title= "Time Series Plot of Average Number of Steps Taken") 
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->

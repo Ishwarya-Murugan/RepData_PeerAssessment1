@@ -90,9 +90,12 @@ ggplot(actv_summary_date, aes(x=date)) +
 1. Make a time series plot (i.e. \color{red}{\verb|type = "l"|}type="l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
 ```{r}
-ggplot(actv_summary_date, aes(date, steps_mean)) + 
+
+actv_summary_inter <- activity %>% group_by(interval) %>% summarise(steps_mean= mean(steps, na.rm=TRUE))
+
+ggplot(actv_summary_inter, aes(interval, steps_mean)) + 
   geom_area(alpha = 0.5, color="#00AFBB", fill="#00AFBB") +
-  labs(x = "Date",y = "Average number of steps taken",
+  labs(x = "Time Interval",y = "Average number of steps taken",
        title= "Time Series Plot of Average Number of Steps Taken") 
 ```
 
